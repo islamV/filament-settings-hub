@@ -6,7 +6,7 @@ use TomatoPHP\FilamentSettingsHub\Tests\Models\User;
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\get;
-use function Pest\Livewire\livewire;
+use Livewire\Livewire;
 
 beforeEach(function () {
     actingAs(User::factory()->create());
@@ -31,7 +31,7 @@ it('can render social menu settings page resource', function () {
 
 it('can validate social menu settings before save', function () {
 
-    livewire(\TomatoPHP\FilamentSettingsHub\Pages\SocialMenuSettings::class)
+    Livewire::test(\TomatoPHP\FilamentSettingsHub\Pages\SocialMenuSettings::class)
         ->fillForm([
             'site_social' => null,
         ])
@@ -51,7 +51,7 @@ it('can save social menu settings', function () {
         ],
     ];
 
-    livewire(\TomatoPHP\FilamentSettingsHub\Pages\SocialMenuSettings::class)
+    Livewire::test(\TomatoPHP\FilamentSettingsHub\Pages\SocialMenuSettings::class)
         ->fillForm($data)
         ->call('save')
         ->assertHasNoFormErrors();

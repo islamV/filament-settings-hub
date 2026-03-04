@@ -5,7 +5,7 @@ use TomatoPHP\FilamentSettingsHub\Tests\Models\User;
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\get;
-use function Pest\Livewire\livewire;
+use Livewire\Livewire;
 
 beforeEach(function () {
     actingAs(User::factory()->create());
@@ -61,7 +61,7 @@ it('can render site settings page resource', function () {
 });
 
 it('can validate site settings before save', function () {
-    livewire(\TomatoPHP\FilamentSettingsHub\Pages\SiteSettings::class)
+    Livewire::test(\TomatoPHP\FilamentSettingsHub\Pages\SiteSettings::class)
         ->fillForm([
             'site_name' => null,
         ])
@@ -76,7 +76,7 @@ it('can save site settings', function () {
     $data = $siteSettings->toArray();
     $data['site_name'] = 'new';
 
-    livewire(\TomatoPHP\FilamentSettingsHub\Pages\SiteSettings::class)
+    Livewire::test(\TomatoPHP\FilamentSettingsHub\Pages\SiteSettings::class)
         ->fillForm($data)
         ->call('save');
 
